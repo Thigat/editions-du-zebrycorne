@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Soumettre un manuscrit aux Éditions Zébrycorne — Romans, Sagas et Nouvelles Fantasy et Fantastique.">
+  <title>Soumettre un Manuscrit — Éditions Zébrycorne</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Styles spécifiques à la page manuscrit */
+    .manuscrit-hero {
+      background: linear-gradient(180deg, var(--dark2) 0%, var(--dark) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+    .manuscrit-hero h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(28px, 4vw, 52px);
+      color: var(--gold);
+      text-shadow: 0 0 30px rgba(212,160,32,0.4);
+      margin: 16px 0 20px;
+    }
+    .manuscrit-hero p {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Cartes de catégories */
+    .categories {
+      padding: 80px 0;
+      background: var(--dark3);
+    }
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 60px;
+    }
+    .cat-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      padding: 40px 32px;
+      position: relative;
+      transition: all 0.4s;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .cat-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .cat-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .cat-icon {
+      font-size: 44px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .cat-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-card .description {
+      font-family: 'IM Fell English', serif;
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .criteres {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .criteres li {
+      font-family: 'IM Fell English', serif;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+      padding-left: 20px;
+      position: relative;
+    }
+    .criteres li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 10px;
+      top: 4px;
+    }
+    .publication-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--dark);
+      background: var(--gold);
+      padding: 6px 14px;
+      margin-top: 8px;
+    }
+    .publication-text {
+      font-family: 'IM Fell English', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-top: 16px;
+      line-height: 1.7;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Section envoi */
+    .envoi-section {
+      padding: 80px 0;
+      background: var(--dark2);
+      border-top: 1px solid var(--border);
+    }
+    .envoi-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .envoi-box {
+      background: rgba(212,160,32,0.05);
+      border: 1px solid var(--border);
+      padding: 50px;
+      margin-top: 40px;
+      position: relative;
+    }
+    .envoi-box::before, .envoi-box::after {
+      content: '✦';
+      position: absolute;
+      color: var(--gold);
+      font-size: 20px;
+      opacity: 0.5;
+    }
+    .envoi-box::before { top: 16px; left: 20px; }
+    .envoi-box::after { bottom: 16px; right: 20px; }
+
+    .email-display {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: var(--gold);
+      letter-spacing: 3px;
+      background: rgba(212,160,32,0.08);
+      border: 1px solid var(--gold);
+      padding: 20px 40px;
+      display: inline-block;
+      margin: 28px 0;
+      word-break: break-all;
+    }
+    .envoi-note {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* Section rappel format */
+    .format-section {
+      padding: 60px 0;
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+    }
+    .format-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .format-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      padding: 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .format-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    .format-card strong {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 8px;
+    }
+    .format-card p {
+      font-family: 'IM Fell English', serif;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Retour accueil */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 10px 24px;
+      transition: all 0.3s;
+      margin-top: 40px;
+      display: inline-block;
+    }
+    .back-link:hover {
+      border-color: var(--gold);
+      background: rgba(212,160,32,0.08);
+    }
+
+    @media (max-width: 900px) {
+      .categories-grid { grid-template-columns: 1fr; }
+      .format-grid { grid-template-columns: 1fr; }
+      .envoi-box { padding: 30px 20px; }
+      .email-display { padding: 16px 20px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="scrolled">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <img src="ZebryCorne_net.png" alt="Logo Zébrycorne" />
+        <span>Éditions Zébrycorne</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="index.html#catalogue">Catalogue</a></li>
+        <li><a href="index.html#apropos">À propos</a></li>
+        <li><a href="index.html#auteurs">Auteurs</a></li>
+        <li><a href="manuscrit.html" style="color:var(--gold)">Manuscrits</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <button class="burger" id="burger">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="manuscrit-hero">
+    <div class="ornament">✦ ✦ ✦</div>
+    <h1>Soumettre un Manuscrit</h1>
+    <p>Vous avez écrit une histoire qui sort de l'ordinaire ? Nous lisons chaque manuscrit avec attention et passion.</p>
+  </div>
+
+  <!-- CATÉGORIES -->
+  <section class="categories">
+    <div class="container">
+      <div class="section-title">
+        <div class="ornament">✦ ✦ ✦</div>
+        <h2>Ce que nous recherchons</h2>
+        <p class="section-sub">Trois portes vers l'extraordinaire</p>
+      </div>
+
+      <div class="categories-grid">
+
+        <!-- Romans -->
+        <div class="cat-card">
+          <span class="cat-icon">📖</span>
+          <h3>Romans Fantasy & Atypique</h3>
+          <p class="description">Nous recherchons des romans fantasy et fantastiques sous l'angle de l'atypisme, avec un intérêt particulier pour des personnages dont le mode de pensée sort de l'ordinaire — surdoués, hypersensibles ou simplement très originaux.</p>
+          <ul class="criteres">
+            <li>Histoire complète</li>
+            <li>À partir de 200 000 caractères</li>
+            <li>Fichier .odt, .doc ou .docx</li>
+            <li>Nom du document : <em>Titre – Prénom Nom ou pseudonyme</em></li>
+            <li>Coordonnées de l'auteur en fin de document</li>
+          </ul>
+          <span class="publication-badge">Publication à compte d'éditeur</span>
+          <p class="publication-text">Les textes retenus feront l'objet d'une publication à compte d'éditeur, distribués dans un large réseau numérique et disponibles dans toutes les bonnes librairies.</p>
+        </div>
+
+        <!-- Sagas -->
+        <div class="cat-card">
+          <span class="cat-icon">⚔️</span>
+          <h3>Sagas Fantasy & Fantastique</h3>
+          <p class="description">Vos univers sont vastes et vos histoires s'étendent sur plusieurs tomes ? Nous sommes prêts à vous accompagner dans cette aventure épique, à condition que la saga soit bien engagée.</p>
+          <ul class="criteres">
+            <li>Saga terminée ou bien engagée</li>
+            <li>Au moins 3 tomes terminés</li>
+            <li>À partir de 200 000 caractères par tome</li>
+            <li>Fichier .odt, .doc ou .docx</li>
+            <li>Nom du document : <em>Titre – Prénom Nom ou pseudonyme</em></li>
+            <li>Coordonnées de l'auteur en fin de document</li>
+          </ul>
+          <span class="publication-badge">Publication à compte d'éditeur</span>
+          <p class="publication-text">Les textes retenus feront l'objet d'une publication à compte d'éditeur, distribués dans un large réseau numérique et disponibles dans toutes les bonnes librairies.</p>
+        </div>
+
+        <!-- Nouvelles -->
+        <div class="cat-card">
+          <span class="cat-icon">🌙</span>
+          <h3>Nouvelles Fantasy & Fantastique</h3>
+          <p class="description">Le format court a ses propres exigences et sa propre magie. Une nouvelle bien construite peut être aussi puissante qu'un roman. Les séries avec un héros récurrent sont les bienvenues !</p>
+          <ul class="criteres">
+            <li>Récit complet de 30 000 à 60 000 caractères</li>
+            <li>Une série avec un héros commun est bienvenue</li>
+            <li>Fichier .odt, .doc ou .docx</li>
+            <li>Nom du document : <em>Titre – Prénom Nom ou pseudonyme</em></li>
+            <li>Coordonnées de l'auteur en fin de document</li>
+          </ul>
+          <span class="publication-badge">Magazine Graalgard</span>
+          <p class="publication-text">Les nouvelles retenues seront publiées dans <strong style="color:var(--gold)">Graalgard</strong>, notre magazine de fantasy trimestriel — ou plus si affinités — 100% numérique.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAT RAPPEL -->
+  <section class="format-section">
+    <div class="container">
+      <div class="section-title">
+        <div class="ornament">✦ ✦ ✦</div>
+        <h2>Rappel des consignes</h2>
+        <p class="section-sub">Pour que votre envoi soit traité dans les meilleures conditions</p>
+      </div>
+      <div class="format-grid">
+        <div class="format-card">
+          <div class="format-icon">📄</div>
+          <div>
+            <strong>Format du fichier</strong>
+            <p>Texte en LibreOffice (.odt), Word (.doc ou .docx) uniquement. Aucun autre format accepté.</p>
+          </div>
+        </div>
+        <div class="format-card">
+          <div class="format-icon">✏️</div>
+          <div>
+            <strong>Nom du document</strong>
+            <p>Titre de l'œuvre suivi d'un tiret, puis prénom et nom (ou pseudonyme) de l'auteur.<br><em style="color:var(--gold)">Ex : Le Dragon de Brume – Jean Dupont.docx</em></p>
+          </div>
+        </div>
+        <div class="format-card">
+          <div class="format-icon">👤</div>
+          <div>
+            <strong>Coordonnées de l'auteur</strong>
+            <p>Vos coordonnées complètes (nom, email, téléphone) doivent figurer à la fin du document.</p>
+          </div>
+        </div>
+        <div class="format-card">
+          <div class="format-icon">📏</div>
+          <div>
+            <strong>Longueur requise</strong>
+            <p>Romans et sagas : à partir de 200 000 caractères.<br>Nouvelles : entre 30 000 et 60 000 caractères.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENVOI -->
+  <section class="envoi-section">
+    <div class="container">
+      <div class="envoi-inner">
+        <div class="section-title">
+          <div class="ornament">✦ ✦ ✦</div>
+          <h2>Envoyez-nous votre manuscrit</h2>
+        </div>
+        <div class="envoi-box">
+          <p style="font-family:'IM Fell English',serif; font-size:17px; color:var(--text); line-height:1.8;">
+            Joignez votre manuscrit en pièce jointe à l'adresse suivante. Nous lisons chaque envoi avec soin et nous nous engageons à vous répondre dans les meilleurs délais.
+          </p>
+          <div class="email-display">
+            zebrycorne-manuscrits [at] gmx.fr
+          </div>
+          <p class="envoi-note">
+            Remplacez [at] par @ dans votre client mail.<br>
+            Indiquez en objet le titre de votre œuvre et sa catégorie<br>
+            <em>(Roman / Saga / Nouvelle)</em>.
+          </p>
+        </div>
+        <a href="index.html" class="back-link">← Retour au site</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="ZebryCorne_net.png" alt="Logo" />
+        <span>Éditions Zébrycorne</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="index.html#catalogue">Catalogue</a>
+        <a href="index.html#apropos">À propos</a>
+        <a href="index.html#auteurs">Auteurs</a>
+        <a href="manuscrit.html">Manuscrits</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <p class="footer-copy">© 2025 Éditions Zébrycorne — Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <script>
+    // Burger menu
+    const burger = document.getElementById('burger');
+    const navLinks = document.querySelector('.nav-links');
+    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+    // Animations au scroll
+    const cards = document.querySelectorAll('.cat-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 150);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    cards.forEach(card => observer.observe(card));
+  </script>
+
+</body>
+</html>
