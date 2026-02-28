@@ -1,4 +1,4 @@
-# 🦓 Éditions Zébrycorne — Site Vitrine
+# 🦓 Éditions du Zébrycorne — Site Vitrine
 
 ## 📁 Structure des fichiers
 
