@@ -1,5 +1,5 @@
 /* ============================================
-   ÉDITIONS ZÉBRYCORNE — Feuille de style
+   ÉDITIONS DU ZÉBRYCORNE — Feuille de style
    ============================================ */
 
 :root {
@@ -762,7 +762,7 @@ footer {
 
 .footer-copy {
     font-size: 13px;
-    color: rgba(232,224,208,0.3);
+    color: rgba(232,224,208,0.6);
     font-style: italic;
 }
 
@@ -827,3 +827,4 @@ footer {
         padding: 0 20px;
     }
 }
+
